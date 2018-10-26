@@ -10,7 +10,7 @@ public enum ResultCode {
     INCORRECT_CREDENTIALS(20021,"用户名或密码不正确"),
     LOCKED_ACCOUNT(20022,"账户被锁定"),
     EXCESSIVE_ATTEMPTS(20023,"密码错误次数过多"),
-    LOGIN_FAIL(20024,"未知错误，登录失败"),
+    LOGIN_FAIL(20024,"内部错误"),
     UNAUTHORIZED(20025,"未登录"),
     FORBIDDEN(20026,"无访问权限");
 

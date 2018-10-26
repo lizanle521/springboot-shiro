@@ -1,6 +1,10 @@
 package cn.wlcloudy.shiro.entity.po;
 
 
+import com.alibaba.fastjson.annotation.JSONField;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -13,6 +17,7 @@ import java.io.Serializable;
  **/
 @Entity
 @Table(name="user")
+@ApiModel(description = "用户信息")
 public class User extends BasePO implements Serializable {
     public User() {
     }
@@ -27,21 +32,28 @@ public class User extends BasePO implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(name = "id", value = "用户ID", example = "1")
     private long id;
 
     @Column(columnDefinition = "varchar(100) COMMENT '用户名'")
+    @ApiModelProperty(name = "username", value = "用户名", example = "wlcloudy")
     private String username;
 
     @Column(columnDefinition = "varchar(200) COMMENT '用户密码'")
+    @JSONField(serialize = false)
+    @ApiModelProperty(hidden = true)
     private String password;
 
     @Column(columnDefinition = "varchar(200) COMMENT '邮箱'")
+    @ApiModelProperty(name = "email", value = "邮箱", example = "wlcloudy@163.com")
     private String email;
 
     @Column(name = "nick_name",columnDefinition = "varchar(200) COMMENT '用户昵称'")
+    @ApiModelProperty(name = "nickName", value = "用户昵称", example = "子云")
     private String nickName;
 
     @Column(name = "real_name",columnDefinition = "varchar(100) COMMENT '用户姓名'")
+    @ApiModelProperty(name = "realName", value = "用户姓名", example = "王雄")
     private String realName;
 
     public long getId() {
