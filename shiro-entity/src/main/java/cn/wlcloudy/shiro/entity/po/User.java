@@ -1,9 +1,6 @@
 package cn.wlcloudy.shiro.entity.po;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.stereotype.Service;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -16,7 +13,6 @@ import java.io.Serializable;
  **/
 @Entity
 @Table(name="user")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User extends BasePO implements Serializable {
     public User() {
     }

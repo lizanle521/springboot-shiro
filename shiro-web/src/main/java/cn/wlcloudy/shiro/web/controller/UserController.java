@@ -1,4 +1,4 @@
-package cn.wlcloudy.shiro.controller;
+package cn.wlcloudy.shiro.web.controller;
 
 import cn.wlcloudy.shiro.entity.po.User;
 import cn.wlcloudy.shiro.service.UserService;

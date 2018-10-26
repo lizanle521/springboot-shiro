@@ -21,10 +21,7 @@ spring:
       ddl-auto: update
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-  jackson:
-    date-format: yyyy-MM-dd HH:mm:ss
-    time-zone: GMT+8
-    default-property-inclusion: non_default
+
 
 # 服务器配置
 server:
@@ -34,6 +31,12 @@ server:
   servlet:
     session:
       timeout: 7200
+
+#swagger
+swagger:
+  enable: true
+  controller:
+    package: cn.wlcloudy.shiro.web.controller
 
 # 日志
 logging:

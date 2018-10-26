@@ -32,7 +32,7 @@ import java.util.Map;
  **/
 @Configuration
 public class ShiroConfig {
-    @Value("{}")
+    @Value("{server.servlet.session.timeout}")
     private int tomcatTimeout;
 
     /**
@@ -68,8 +68,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/api/v1/login", "anon");
 //		filterChainDefinitionMap.put("/api/v1/user/logout", "logout");	// 用户退出，只需配置logout即可实现该功能
         // 其他路径均需要身份认证，一般位于最下面，优先级最低
-        filterChainDefinitionMap.put("/api/v1/guest/**", "login");
-        filterChainDefinitionMap.put("/api/v1/admin/**", "login");
+        filterChainDefinitionMap.put("/api/v1/guest/**", "anon");
+        filterChainDefinitionMap.put("/api/v1/admin/**", "anon");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 //		shiroFilterFactoryBean.setLoginUrl("/login");		// 登录的路径
 //		shiroFilterFactoryBean.setSuccessUrl("/api/v1/dashboard");	// 登录成功后跳转的路径

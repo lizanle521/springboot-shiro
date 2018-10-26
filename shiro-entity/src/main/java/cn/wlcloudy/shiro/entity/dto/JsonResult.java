@@ -1,6 +1,5 @@
 package cn.wlcloudy.shiro.entity.dto;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 
 /**
@@ -8,7 +7,6 @@ import lombok.Data;
  */
 @Data
 public class JsonResult {
-    private static final ObjectMapper MAPPER = new ObjectMapper();
     /**
      * 错误代码
      * 0：未出错

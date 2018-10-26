@@ -14,8 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 未登录直接返回json字符串而不是跳转
- */
+ * @ClassName JsonFilter
+ * @Description shiro自定义拦截器
+ * @Author wangxiong
+ * @Date 2018/10/22 19:33
+ * @Version 1.0
+ **/
 public class JsonFilter extends AuthenticationFilter {
     /**
      * 未登录提示
