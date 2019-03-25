@@ -4,16 +4,20 @@ import cn.wlcloudy.shiro.config.Endpoints;
 import cn.wlcloudy.shiro.entity.dto.JsonResult;
 import cn.wlcloudy.shiro.entity.dto.ResultCode;
 import cn.wlcloudy.shiro.entity.po.User;
+import cn.wlcloudy.shiro.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * @ClassName LoginController
@@ -26,6 +30,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(Endpoints.API_V1)
 public class LoginController{
+    @Resource
+    private UserService userService;
 
     @ApiOperation("用户登录")
     @PostMapping("/login")
@@ -71,6 +77,27 @@ public class LoginController{
         if (principal != null) {
             currentUser.logout();
         }
+        return JsonResult.OK();
+    }
+
+    @ApiOperation("用户注册")
+    @PostMapping("/register")
+    public JsonResult register(User param){
+        String hashAlgorithmName = "MD5";
+        Object crdentials = param.getPassword();
+        Object salt = param.getUsername();
+        int hashIterations = 1;
+        // 这里这么加密的原因是 解密的时候调用的HashedCredentialsMatcher.doCredentialsMatch
+        SimpleHash result = new SimpleHash(hashAlgorithmName,crdentials,salt,hashIterations);
+
+        User user = new User();
+        user.setUsername(param.getUsername());
+        user.setPassword(result.toString());
+        user.setEmail(param.getEmail());
+        user.setNickName(param.getNickName());
+        user.setRealName(param.getRealName());
+        // 用user service进行注册
+        //user = userService.registerUser(user);
         return JsonResult.OK();
     }
 }
