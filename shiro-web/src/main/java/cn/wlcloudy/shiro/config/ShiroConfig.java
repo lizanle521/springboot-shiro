@@ -130,14 +130,13 @@ public class ShiroConfig {
 
     /**
      * ehcache缓存管理器
-     * @param cacheManager
      * @return
      */
     @Bean
-    public EhCacheManager ehCacheManager(CacheManager cacheManager) {
+    public EhCacheManager ehCacheManager() {
         EhCacheManager em = new EhCacheManager();
         //将ehcacheManager转换成shiro包装后的ehcacheManager对象
-        em.setCacheManager(cacheManager);
+        em.setCacheManager(CacheManager.getCacheManager("shiroCache"));
         return em;
     }
 
@@ -149,6 +148,7 @@ public class ShiroConfig {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(baicMotorShiroRealm());
         securityManager.setCacheManager(ehCacheManager);
+        securityManager.setSessionManager(sessionManager(ehCacheManager));
         return securityManager;
     }
 
