@@ -76,8 +76,11 @@ public class ShiroConfig {
 //		shiroFilterFactoryBean.setUnauthorizedUrl("/403");	// 验证失败后跳转的路径
         Map<String, Filter> filters = new LinkedHashMap<String, Filter>();
         JsonFilter jsonFilter = new JsonFilter();
+        MyAuthorizationFilter authorizationFilter = new MyAuthorizationFilter();
         filters.put("login", jsonFilter);
+        filters.put("authorize",authorizationFilter);
         shiroFilterFactoryBean.setFilters(filters);
+
         return shiroFilterFactoryBean;
     }
 
